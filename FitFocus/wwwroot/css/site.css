@@ -1,0 +1,84 @@
+html {
+  font-size: 14px;
+  margin: 0;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px;
+    font-family: 'Roboto Mono', monospace;
+    background: #899499
+}
+
+.homepage-hero {
+    padding-top: 10em;
+}
+
+.blogs-home-container {
+    padding-top: 6em;
+}
+.blogs-details-content {
+    background-color: floralwhite;
+}
+
+.navbar-toggler-icon {
+    width: 1.2em;
+}
+
+.photo {
+    background-color: floralwhite;
+}
+
+.thumbs:before {
+    width: 3em;
+}
+
+.home-body-container {
+    padding-bottom: 5em;
+}
+
+.footer {
+    width: 100%;
+}
+
+.blogs-page {
+    padding: 10em 0 4em 0;
+}
+
+@media screen and (max-width: 480px) {
+    html {
+        overflow-x: hidden;
+    }
+
+    .footer {
+        width: 100%;
+        overflow-x: hidden
+    }
+
+    .homepage-img {
+        display: none;
+    }
+
+    .photo {
+        width: 88%;
+        margin: 0 auto;
+    }
+
+    .blogs-page {
+        padding: 9em 1.1em 1.1em 1.1em;
+    }
+}

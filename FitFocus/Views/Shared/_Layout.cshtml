@@ -1,0 +1,186 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> signInManager
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - FitFocus</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/FitFocus.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <link rel="icon" href="@Url.Content("/images/logo-fav.png")" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/logo-fav.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/8a2619a42b.js" crossorigin="anonymous"></script>
+    <style>
+        .search-btn {
+            background-color: #f0f0f0;
+        }
+
+        .btn-no-border {
+            box-shadow: none !important;
+            outline: none !important;
+        }
+
+        .logo {
+            width: 11em;
+            height: auto;
+        }
+
+        .navbar {
+            padding: 0.1em 0;
+        }
+
+        .offcanvas-header {
+            justify-content: flex-end;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        @* <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">FitFocus</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav> *@
+
+        <nav class="navbar navbar-dark bg-dark fixed-top">
+            <div class="container">
+                <a class="navbar-brand" href="/">
+                    <img src="/images/white_logo.png" alt="Logo" class="img-fluid d-inline-block align-text-top logo">
+                </a>
+                <button class="navbar-toggler border-dark btn-no-border" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+                    <div class="offcanvas-header bg-dark">
+                        @* <h5 class="offcanvas-title text-light" id="offcanvasDarkNavbarLabel">Dark offcanvas</h5> *@
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body bg-dark">
+                        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+
+                                @if (signInManager.IsSignedIn(User))
+                                {
+                                    <div class="me-3 text-light">
+                                        Welcome,&nbsp;@User?.Identity?.Name
+                                    </div>
+
+                                    <a class="btn btn-login me-3 text-light"
+                                       asp-area=""
+                                       asp-controller="Account"
+                                       asp-action="Logout">
+                                        Logout
+                                    </a>
+                                }
+                                else
+                                {
+                                    <a class="btn btn-login me-3 text-light"
+                                       asp-area=""
+                                       asp-controller="Account"
+                                       asp-action="Login">
+                                        Login
+                                    </a>
+
+                                    <a class="btn btn-login me-3 text-light"
+                                       asp-area=""
+                                       asp-controller="Account"
+                                       asp-action="Register">
+                                        Join
+                                    </a>
+                                }
+
+                            @if (User.IsInRole("Admin") && signInManager.IsSignedIn(User))
+                            {
+                                <li class="nav-item dropdown my-sm-0">
+                                    <a class="nav-link dropdown-toggle text-light btn-login admin-drop" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Admin
+                                    </a>
+                                    <ul class="dropdown-menu bg-secondary bg-gradient hover-light">
+                                        <li>
+                                            <a class="dropdown-item text-dark hover-light btn-login"
+                                               asp-area=""
+                                               asp-controller="AdminBlogPosts"
+                                               asp-action="Add">
+                                                Add Blog Post&nbsp;&nbsp;&#9734;
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item text-dark hover-light btn-login"
+                                               asp-area=""
+                                               asp-controller="AdminBlogPosts"
+                                               asp-action="List">
+                                                View/Edit Blog Posts
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item text-dark hover-light btn-login"
+                                               asp-area=""
+                                               asp-controller="AdminTags"
+                                               asp-action="Add">
+                                                Add New Tag
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item text-dark hover-light btn-login"
+                                               asp-area=""
+                                               asp-controller="AdminTags"
+                                               asp-action="List">
+                                                View Tags
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item text-dark hover-light btn-login"
+                                               asp-area=""
+                                               asp-controller="AdminUsers"
+                                               asp-action="List">
+                                                View Users
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            }
+                        </ul>
+                        <form class="d-flex mt-3" role="search">
+                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                            <button class="btn search-btn" type="submit">Search</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+    </header>
+    <div>
+        <main role="main" class="pb-3" style="background: #899499">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted bg-dark">
+        <div class="container text-light">
+            &copy; 2023 - Fit Focused Health <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

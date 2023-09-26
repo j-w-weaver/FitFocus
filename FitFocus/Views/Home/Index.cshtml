@@ -1,0 +1,71 @@
+﻿@model FitFocus.Models.ViewModels.HomeViewModel
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+<meta name="description" content="Fit Focused Health is here bring you the most up to date information regarding health and wellness."/>
+
+<div class="container col-xxl-8 homepage-hero">
+    <div class="row align-items-center g-5 hero-section">
+        <div class="col-12 col-lg-6">
+            <h2 class="display-5 fw-bold lh-1 mb-3">
+                @* <i style="font-weight: 400;">Eat Pray Garden</i> *@<span style="font-weight: 300;"><br />The Best Version of Yourself</span>
+            </h2>
+            <p class="lead" style="font-size: 1.2em;">
+                Fit Focused Health is here bring you nutrient-dense information to satiate your hunger
+                for truth and clarity. Feed your mind, body, and soul.
+            </p>
+        </div>
+
+        <div class="col-12 col-lg-6 homepage-img">
+            <img class="d-block mx-lg-auto img-fluid" style="width: 40em; border-radius: 5px;" src="/images/weight-benches.jpg" alt="" />
+        </div>
+    </div>
+</div>
+
+<div class="container home-body-container">
+    <div class="row justify-content-center blogs-home-container">
+        <div class="col-md-6">
+
+            @if (Model != null && Model.BlogPosts.Any())
+            {
+                foreach (var blogPost in Model.BlogPosts)
+                {
+                    <div class="mb-5 box-shadow p-4 rounded-2 photo">
+                        <img src="@blogPost.FeaturedImageUrl" alt="@blogPost.Heading"
+                             class="mb-2 d-block img-fluid">
+                        <h2 class="mb-4">@blogPost.Heading</h2>
+                        <p class="mb-3">
+                            Author: @blogPost.Author
+                            <br>
+                            Published Date: @blogPost.PublishedDate.ToShortDateString()
+                        </p>
+
+                        <div class="mb-3">
+                        </div>
+
+                        <p class="mb-3">
+                            @foreach (var tag in blogPost.Tags)
+                            {
+                                <span class="badge bg-secondary me-1">@tag.Name</span>
+                            }
+                        </p>
+
+                        <p class="mb-3">@blogPost.ShortDescription</p>
+
+                        <a class="btn btn-dark"
+                           asp-area=""
+                           asp-controller="Blogs"
+                           asp-action="Index"
+                           asp-route-urlHandle="@blogPost.UrlHandle">
+                            Read More &rarr;
+                        </a>
+                    </div>
+                }
+            }
+
+        </div>
+    </div>
+</div>
