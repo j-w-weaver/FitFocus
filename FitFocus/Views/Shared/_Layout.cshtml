@@ -104,6 +104,13 @@
                                        asp-action="Register">
                                         Join
                                     </a>
+
+                                    <a class="btn btn-login me-3 text-light"
+                                       asp-area=""
+                                       asp-controller="Home"
+                                       asp-action="Contact">
+                                        Contact
+                                    </a>
                                 }
 
                             @if (User.IsInRole("Admin") && signInManager.IsSignedIn(User))
@@ -157,10 +164,10 @@
                                 </li>
                             }
                         </ul>
-                        <form class="d-flex mt-3" role="search">
+                        @* <form class="d-flex mt-3" role="search">
                             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                            <button class="btn search-btn" type="submit">Search</button>
-                        </form>
+                            <button class="btn search-btn" type="submit">Search</button> 
+                        </form> *@
                     </div>
                 </div>
             </div>
