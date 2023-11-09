@@ -118,7 +118,7 @@ namespace FitFocus.Controllers
 
         public async Task<IActionResult> Edit(EditBlogPostRequest editBlogPostRequest)
         {
-            // Map view wmodel back to domain model
+            // Map view model back to domain model
             var blogPostDomainModel = new BlogPost
             {
                 Id = editBlogPostRequest.Id,
