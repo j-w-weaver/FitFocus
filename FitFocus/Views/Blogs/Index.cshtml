@@ -120,7 +120,7 @@
                 .then(result => totalLikeElement.innerHTML = result);
         }
 
-
+        
         async function addLikeForBlog() {
             fetch('/api/BlogPostLike/Add', {
                 method: 'POST',
@@ -141,5 +141,8 @@
 
         btnLikeElement.addEventListener('click', addLikeForBlog);
 
+    </script>
+    <script>
+        
     </script>
 }
